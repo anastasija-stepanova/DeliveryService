@@ -2,17 +2,15 @@
 
 namespace App\Contracts;
 
+use App\DTO\OrderData;
+
 abstract class DeliveryService
 {
-    protected string $sourceKladr;
-    protected string $targetKladr;
-    protected float $weight;
+    protected OrderData $orderData;
 
-    public function __construct(string $sourceKladr, string $targetKladr, float $weight)
+    public function __construct(OrderData $orderData)
     {
-        $this->sourceKladr = $sourceKladr;
-        $this->targetKladr = $targetKladr;
-        $this->weight = $weight;
+        $this->orderData = $orderData;
     }
 
     abstract public function calculateShippingCost();

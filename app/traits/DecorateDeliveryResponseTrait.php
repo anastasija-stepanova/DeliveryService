@@ -41,7 +41,7 @@ trait DecorateDeliveryResponseTrait
         return [
             'price' => $response['price'] ?? 0,
             'date' => $date,
-            'error' =>null,
+            'error' => null,
         ];
     }
 

@@ -26,7 +26,7 @@ class ShippingRequest extends FormRequest
             'type' => ['required', Rule::in(['fast', 'slow'])],
             'sourceKladr' => ['required','string', 'min:1'],
             'targetKladr' => ['required','string', 'min:1'],
-            'weight' => ['required', 'min:0'],
+            'weight' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Delivery;
 
 use App\Contracts\DeliveryService;
+use App\DTO\OrderData;
 use App\traits\DecorateDeliveryResponseTrait;
 use ErrorException;
 
@@ -19,13 +20,11 @@ class FastDeliveryService extends DeliveryService
     protected string $base_url = '';
 
     /**
-     * @param string $sourceKladr
-     * @param string $targetKladr
-     * @param float $weight
+     * @param OrderData $orderData
      */
-    public function __construct(string $sourceKladr,string $targetKladr,float $weight)
+    public function __construct(OrderData $orderData)
     {
-        parent::__construct($sourceKladr, $targetKladr, $weight);
+        parent::__construct($orderData);
     }
 
     /**
@@ -36,9 +35,9 @@ class FastDeliveryService extends DeliveryService
     {
         // make a request to the API of the Fast Delivery Service and get the response
         $response = [
-            'price'=> '5.23',
-            'period'=> '1',
-            'error'=> '',
+            'price' => '5.23',
+            'period' => '1',
+            'error' => '',
         ];
 
         $response['type'] = 'fast';

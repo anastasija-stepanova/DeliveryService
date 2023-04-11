@@ -2,6 +2,7 @@
 
 namespace App\Services\Shipping;
 
+use App\DTO\OrderData;
 use App\Models\Order;
 use App\Services\Delivery\FastDeliveryService;
 use App\Services\Delivery\SlowDeliveryService;
@@ -12,10 +13,12 @@ class ShippingService
     /**
      * @throws ErrorException
      */
-    public static function makeShipping($request) {
-        $result =  match ($request['type']) {
-            'fast' => (new FastDeliveryService($request['sourceKladr'], $request['targetKladr'], $request['weight']))->calculateShippingCost(),
-            'slow' => (new SlowDeliveryService($request['sourceKladr'], $request['targetKladr'], $request['weight']))->calculateShippingCost(),
+    public static function makeShipping(array $request): array
+    {
+        $orderData = new OrderData($request);
+        $result = match ($request['type']) {
+            'fast' => (new FastDeliveryService($orderData))->calculateShippingCost(),
+            'slow' => (new SlowDeliveryService($orderData))->calculateShippingCost(),
         };
 
         $order = new Order();
